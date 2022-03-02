@@ -6,11 +6,11 @@
 /*   By: dluna-lo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:58:30 by dluna-lo          #+#    #+#             */
-/*   Updated: 2022/03/02 06:33:31 by dluna-lo         ###   ########.fr       */
+/*   Updated: 2022/03/02 06:43:21 by dluna-lo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strlowcase(char *str)
+char	*ft_strupcase(char *str)
 {
 	int	i;
 
