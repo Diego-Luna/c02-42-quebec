@@ -1,35 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcapitalize.c                                 :+:      :+:    :+:   */
+/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dluna-lo <marvin@42quebec.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/02 07:19:08 by dluna-lo          #+#    #+#             */
-/*   Updated: 2022/03/02 10:07:51 by dluna-lo         ###   ########.fr       */
+/*   Created: 2022/03/02 10:15:05 by dluna-lo          #+#    #+#             */
+/*   Updated: 2022/03/02 12:22:45 by dluna-lo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcapitalize(char *str)
+#include <unistd.h>
+
+void	ft_write(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_decimal(int c, int n)
+{
+	char	*hex;
+
+	hex = "0123456789abcdef";
+	if (c > 16)
+	{
+		ft_decimal(c / 16, n + 1);
+		ft_decimal(c % 16, n + 1);
+	}
+	else
+	{
+		if (n == 0)
+			ft_write('0');
+		ft_write(hex[c]);
+	}
+}
+
+void	ft_putstr_non_printable(char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (i == 0 && str[i] >= 97 && str[i] <= 122)
-			str[i] -= 32;
-		else if ((str[i] >= 97 && str[i] <= 122)
-			&& !(str[i - 1] >= 48 && str[i - 1] <= 122))
+		if (!(str[i] >= 32 && str[i] <= 126))
 		{
-			str[i] -= 32;
+			ft_write('\\');
+			ft_decimal(str[i], 0);
 		}
-		else if ((str[i] >= 65 & str[i] <= 90)
-			&& (str[i - 1] >= 65 && str[i - 1] <= 122))
-		{
-			str[i] += 32;
-		}
+		else
+			ft_write(str[i]);
 		i++;
 	}
-	return (str);
 }
